@@ -235,18 +235,6 @@ HybridDocumentSearch/
     └── st_app.py                # Alternative entry point
 ```
 
-### Key Files & Their Purpose
-
-| File | Purpose | Status |
-|------|---------|---------|
-| `start_app.py` | **Recommended startup** - handles dependencies, cleanup, startup | ✅ New |
-| `home.py` | Main Streamlit application entry point | ✅ Working |
-| `fix_database_lock.py` | Quick fix for database lock issues | ✅ New |
-| `cleanup_processes.py` | Comprehensive process cleanup | ✅ New |
-| `01_Wyszukiwarka.py` | Search interface with multi-collection search | ✅ Fixed |
-| `02_Quality_monitor.py` | Quality evaluation and testing interface | ✅ Fixed |
-| `pyproject.toml` | UV-based dependency management | ✅ Working |
-
 ## Quality Monitoring
 
 ### Running Evaluations
@@ -288,6 +276,7 @@ Access the quality monitoring interface at `/Quality_monitor` in the Streamlit a
 ### Adding New Collections
 
 1. Create specialized search service:
+   
 ```python
 class SearchByNewCollection:
     def __init__(self, qdrant_service, embedding_service):
@@ -295,7 +284,8 @@ class SearchByNewCollection:
         # Implementation
 ```
 
-2. Update AdvancedSearchService:
+1. Update AdvancedSearchService:
+
 ```python
 self.collection_service_map = {
     "documents": self.search_service,
@@ -306,7 +296,8 @@ self.collection_service_map = {
 }
 ```
 
-3. Configure bonus scoring:
+1. Configure bonus scoring:
+
 ```python
 self.collection_bonuses = {
     "documents_keywords": 1.5,
