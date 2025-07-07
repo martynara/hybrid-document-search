@@ -1,0 +1,133 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "hybridsearch"
+version = "0.1.0"
+description = "A sophisticated hybrid document search and retrieval system that combines multiple search strategies to provide highly relevant results"
+authors = [{name = "Your Name", email = "your.email@example.com"}]
+license = {text = "MIT"}
+readme = "README.md"
+keywords = ["search", "rag", "nlp", "ai", "vector-database", "hybrid-search", "document-processing"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers", 
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Text Processing :: Indexing",
+    "Topic :: Internet :: WWW/HTTP :: Indexing/Search"
+]
+requires-python = ">=3.8"
+
+dependencies = [
+    "streamlit>=1.42.2",
+    "qdrant-client>=1.13.2",
+    "sentence-transformers>=3.4.1",
+    "torch>=2.7.0",
+    "transformers>=4.49.0",
+    "openai>=1.65.2",
+    "python-dotenv>=1.0.1",
+    "spacy>=3.8.4",
+    "numpy>=2.2.3",
+    "pandas>=2.2.3",
+    "filelock>=3.17.0",
+    "docling>=2.26.0",
+    "docling-core>=2.21.2",
+    "pymupdf>=1.25.3",
+    "requests>=2.32.3",
+    "pydantic>=2.10.6"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3.4",
+    "black>=24.10.0",
+    "isort>=5.13.2",
+    "flake8>=7.1.1",
+    "mypy>=1.13.0",
+    "pre-commit>=4.0.1"
+]
+quality = [
+    "matplotlib>=3.10.1",
+    "seaborn>=0.13.2",
+    "plotly>=6.0.0"
+]
+optional = [
+    "jupyter>=1.1.1",
+    "notebook>=7.3.1",
+    "ipykernel>=6.29.5"
+]
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+known_first_party = ["Application", "Infrastructure", "Admin", "pages"]
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+[[tool.mypy.overrides]]
+module = [
+    "qdrant_client.*",
+    "sentence_transformers.*",
+    "docling.*",
+    "docling_core.*",
+    "spacy.*",
+    "pymupdf.*",
+    "fitz.*"
+]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
+
+[project.scripts]
+hybridsearch = "st_app:main"
+
+[project.urls]
+Homepage = "https://github.com/yourusername/hybridsearch"
+Repository = "https://github.com/yourusername/hybridsearch"
+Documentation = "https://github.com/yourusername/hybridsearch/blob/main/README.md"
+"Bug Tracker" = "https://github.com/yourusername/hybridsearch/issues" 
